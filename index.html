@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chris Portfolio</title>
+  <style>
+    
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  scroll-behavior: smooth;
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+  display: flex;
+}
+
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background-color: #111;
+  padding: 2rem 1rem;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+}
+
+.logo-text {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #6363e7;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.logo-image {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-image img {
+  width: 80px;
+  height: auto;
+  border-radius: 50%;
+  border: 2px solid #6363e7;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 20px 0;
+}
+
+.sidebar ul li a {
+  color: #ddd;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  transition: background 0.3s;
+  border-radius: 4px;
+}
+
+.sidebar ul li a:hover {
+  background-color: #6363e7;
+  color: #fff;
+}
+
+.download-btn {
+  background-color: #6363e7;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.download-btn:hover {
+  background-color: #7070e2;
+}
+
+
+.main-content {
+  margin-left: 250px;
+  width: calc(100% - 250px);
+  padding: 20px;
+}
+
+.hero {
+  position: relative;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  color: white;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.btn {
+  background-color: #6363e7;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  transition: background 0.3s ease;
+  display: inline-block;
+}
+
+.btn:hover {
+  background-color:#7070e2;
+}
+
+.about {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.about p {
+  max-width: 700px;
+  margin: 0 auto 1rem;
+  color: #ccc;
+}
+
+.about-image {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.about-image img {
+  width: 220px;
+  height: auto;
+  border-radius: 50%;
+  border: 3px solid #6363e7;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+
+.personal-info {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.personal-info table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: #222;
+  color: #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.personal-info th, .personal-info td {
+  padding: 12px 20px;
+  border-bottom: 1px solid #333;
+}
+
+.personal-info th {
+  text-align: left;
+  color: #6363e7;
+}
+
+.personal-info tr:last-child td {
+  border-bottom: none;
+}
+
+
+.gallery-section {
+  padding: 40px 20px;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 3rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.3s;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+.gallery-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery-item:hover .gallery-info {
+  opacity: 1;
+}
+
+.skills {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.skills h2 {
+  margin-bottom: 20px;
+}
+
+.skill-bar {
+  background: #333;
+  border-radius: 20px;
+  margin: 10px auto;
+  width: 80%;
+  height: 20px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  background: #6363e7;
+  height: 100%;
+  width: 0;
+  text-align: right;
+  padding-right: 10px;
+  line-height: 20px;
+  color: #fff;
+  border-radius: 20px;
+  transition: width 1s ease;
+}
+
+.hobbies {
+  padding: 50px 20px;
+  text-align: center;
+  background: linear-gradient(145deg, #1e1e1e, #2a2a2a);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  margin: 40px auto;
+  max-width: 700px;
+}
+
+.hobbies h2 {
+  font-size: 2.3rem;
+  margin-bottom: 25px;
+  color: #6c63ff;
+  text-shadow: 0 0 12px rgba(108, 99, 255, 0.5);
+  animation: fadeInDown 0.8s ease-in-out;
+}
+
+.hobbies ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+}
+
+.hobbies li {
+  background: #2a2a2a;
+  padding: 15px;
+  border-radius: 10px;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  font-size: 1rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hobbies li i {
+  font-size: 1.8rem;
+  color: #6c63ff;
+  margin-bottom: 8px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  display: block;
+}
+
+.hobbies li:hover {
+  transform: translateY(-4px) scale(1.04);
+  box-shadow: 0 8px 16px rgba(108, 99, 255, 0.35);
+  background: linear-gradient(145deg, #333, #222);
+}
+
+.hobbies li:hover i {
+  color: #9b95ff;
+  transform: rotate(4deg) scale(1.05);
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+.contact {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.contact h2 {
+  margin-bottom: 20px;
+}
+
+.contact p {
+  margin-bottom: 10px;
+}
+
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  background: #111;
+  color: #bbb;
+  margin-top: 30px;
+}
+  </style>
+</head>
+<body>
+
+  <aside class="sidebar">
+    <div class="logo-text">Chris</div>
+    <div class="logo-image">
+      <img src="logo.jpg" alt="Logo" />
+    </div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="resume.pdf" download class="download-btn">Download Resume</a>
+  </aside>
+
+  <div class="main-content">
+
+    <section class="hero">
+      <video autoplay muted loop playsinline class="hero-video">
+        <source src="Network_Number.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-text">
+        <h1>Hello, I'm Chris</h1>
+        <p>A passionate Web Designer and Developer</p>
+        <a href="#about" class="btn">Show More</a>
+      </div>
+    </section>
+
+
+    <section id="about" class="about">
+      <h2>About Me</h2>
+      <p>Hi, I’m Chris Anthony. I’m a passionate web designer who blends creativity with clean, user-focused design.</p>
+      <div class="about-image">
+        <img src="IMG_5918-pica.png" alt="Chris Anthony" />
+      </div>
+
+      <div class="personal-info">
+        <table>
+          <tr><th>Full Name</th><td>Chris Anthony Pancho Daugdaug</td></tr>
+          <tr><th>Age</th><td>18</td></tr>
+          <tr><th>Location</th><td>Philippines</td></tr>
+          <tr><th>Email</th><td>clashingclash562@gmail.com</td></tr>
+        </table>
+      </div>
+    </section>
+
+
+    <section id="gallery" class="gallery-section">
+      <h2 class="section-title">My Gallery</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="first.jpg" alt="Project 1" /><div class="gallery-info">Layout</div></div>
+        <div class="gallery-item"><img src="second.jpg" alt="Project 2" /><div class="gallery-info">Hardware</div></div>
+        <div class="gallery-item"><img src="third.jpg" alt="Project 3" /><div class="gallery-info">Programmer</div></div>
+        <div class="gallery-item"><img src="fourth.jpg" alt="Project 4" /><div class="gallery-info">Web design</div></div>
+        <div class="gallery-item"><img src= "mid.jpg" alt="Project 5" /><div class="gallery-info">Ethical hacking</div></div>
+        <div class="gallery-item"><img src= "seventh.jpg" alt="Project 6" /><div class="gallery-info">Scripter</div></div>
+        <div class="gallery-item"><img src="fifth.jpg" alt="Project 7" /><div class="gallery-info">Hardware Maintenance</div></div>
+        <div class="gallery-item"><img src="eight.png"  alt="Project 8" /><div class="gallery-info">Game development</div></div>
+        <div class="gallery-item"><img src= "nine.jpg" alt="Project 9" /><div class="gallery-info">Cyber Security</div></div>
+      </div>
+    </section>
+
+
+    <section id="skills" class="skills">
+      <h2>My Skills</h2>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%;">HTML</div></div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%;">CSS</div></div>
+      <div class="skill-bar"><div class="skill-bar-fill" style="width: 70%;">Java</div></div>
+    </section>
+
+ 
+    <section id="hobbies" class="hobbies">
+      <h2>My Hobbies</h2>
+      <ul>
+        <li>Coding</li>
+        <li>Chess</li>
+        <li>Making Up Strategies</li>
+        <li>Layout Making</li>
+      </ul>
+    </section>
+
+ 
+    <section id="contact" class="contact">
+      <h2>Contact Me</h2>
+      <p>Email: clashingclash562@gmail.com</p>
+      <p>Phone: 099* *** ***</p>
+    </section>
+
+    <footer class="footer">
+      <p>© 2025 Chris Portfolio. All rights reserved.</p>
+    </footer>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
